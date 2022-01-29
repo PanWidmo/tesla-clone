@@ -1,12 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import imgModel3 from 'assets/images/model-3.jpg';
+import imgModelY from 'assets/images/model-y.jpg';
+import imgModelS from 'assets/images/model-s.jpg';
+import imgModelX from 'assets/images/model-x.jpg';
+import imgSolarPanels from 'assets/images/solar-panel.jpg';
+import imgSolarRoof from 'assets/images/solar-roof.jpg';
+import imgAccessories from 'assets/images/accessories.jpg';
 import downArrow from 'assets/images/down-arrow.svg';
 
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url(${imgModel3});
+  background-image: ${({ title }) => {
+    if (title === 'Model 3') return `url(${imgModel3})`;
+    if (title === 'Model Y') return `url(${imgModelY})`;
+    if (title === 'Model S') return `url(${imgModelS})`;
+    if (title === 'Model X') return `url(${imgModelX})`;
+    if (title === 'Solar Panels') return `url(${imgSolarPanels})`;
+    if (title === 'Solar Roof') return `url(${imgSolarRoof})`;
+    if (title === 'Accessories') return `url(${imgAccessories})`;
+  }};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -26,6 +40,9 @@ const Buttons = styled.div``;
 const ButtonGroup = styled.div`
   display: flex;
   margin-bottom: 50px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftButton = styled.div`
@@ -55,17 +72,17 @@ const DownArrow = styled.img`
   animation: animateDown infinite 1.5s;
 `;
 
-const Section = () => {
+const Section = ({ title, description, leftBtnText, rightBtnText }) => {
   return (
-    <Wrapper>
+    <Wrapper title={title}>
       <ItemText>
-        <h1>Model 3</h1>
-        <p>Order Online for Touchless Delivery</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
       </ItemText>
       <Buttons>
         <ButtonGroup>
-          <LeftButton>Custom Order</LeftButton>
-          <RightButton>Existing Inventory</RightButton>
+          <LeftButton>{leftBtnText}</LeftButton>
+          {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
         </ButtonGroup>
         <DownArrow src={downArrow} />
       </Buttons>
