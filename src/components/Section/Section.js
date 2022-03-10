@@ -8,6 +8,7 @@ import imgSolarPanels from 'assets/images/solar-panel.jpg';
 import imgSolarRoof from 'assets/images/solar-roof.jpg';
 import imgAccessories from 'assets/images/accessories.jpg';
 import downArrow from 'assets/images/down-arrow.svg';
+import Fade from 'react-reveal';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -76,15 +77,26 @@ const Section = ({ title, description, leftBtnText, rightBtnText }) => {
   return (
     <Wrapper title={title}>
       <ItemText>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <Fade bottom>
+          <h1>{title}</h1>
+        </Fade>
+        <Fade bottom>
+          <p>{description}</p>
+        </Fade>
       </ItemText>
+
       <Buttons>
         <ButtonGroup>
-          <LeftButton>{leftBtnText}</LeftButton>
-          {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
+          <Fade left distance="20%">
+            <LeftButton>{leftBtnText}</LeftButton>
+          </Fade>
+          <Fade right distance="20%">
+            {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
+          </Fade>
         </ButtonGroup>
-        <DownArrow src={downArrow} />
+        <Fade top>
+          <DownArrow src={downArrow} />
+        </Fade>
       </Buttons>
     </Wrapper>
   );
